@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">HexiHexi</string>
+
+    <!--READING MODS-->
+    <string name="mode_idle">Connected as: Idle</string>
+    <string name="mode_watch">Connected as: Watch</string>
+    <string name="mode_sensor_tag">Connected as: Sensor tag</string>
+    <string name="mode_weather_station">Connected as: Weather station</string>
+    <string name="mode_motion_control">Connected as: Motion control</string>
+    <string name="mode_heartrate">Connected as: Heartrate</string>
+    <string name="mode_pedometer">Connected as: Pedometer</string>
+    <string name="mode_compass">Connected as: Compass</string>
+</resources>
