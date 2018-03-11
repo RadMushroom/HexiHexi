@@ -15,13 +15,13 @@ import javax.inject.Inject
  * Created by yurii on 10/19/17.
  */
 
-class DeviceDetailsActivity : BaseActivity(), BluetoothServiceCallback {
+class DeviceDetailsActivity : BaseActivity(), BluetoothServiceCallback, OnItemPositionClickListener {
 
     @Inject
     internal lateinit var bluetoothService: HexiBluetoothService
 
     private lateinit var device: BluetoothDevice
-    private val deviceDetailAdapter = DeviceDetailAdapter()
+    private val deviceDetailAdapter = DeviceDetailAdapter(this)
 
     companion object {
         private const val EXTRA_DEVICE = "KEY_DEVICE"
@@ -59,5 +59,11 @@ class DeviceDetailsActivity : BaseActivity(), BluetoothServiceCallback {
         runOnUiThread({
             deviceDetailAdapter.handleDetail(DeviceDetail(characteristic, value))
         })
+    }
+
+    override fun onItemClicked(position: Int) {
+        deviceDetailAdapter.getItem(position)?.let {
+            startActivity(ChartActivity.getStartIntent(this, device, it.type))
+        }
     }
 }

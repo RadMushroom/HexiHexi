@@ -4,10 +4,6 @@ import android.bluetooth.BluetoothDevice
 import android.view.View
 import kotlinx.android.synthetic.main.device_item_layout.view.*
 
-/**
- * Created by yurii on 10/16/17.
- */
-
 class DeviceViewHolder(itemView: View, itemClickListener: OnItemPositionClickListener) : BaseViewHolder<BluetoothDevice>(itemView) {
 
     init {

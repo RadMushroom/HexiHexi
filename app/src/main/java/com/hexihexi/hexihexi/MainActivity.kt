@@ -34,6 +34,14 @@ class MainActivity : BaseActivity(), DiscoveryCallback, OnItemPositionClickListe
         runOnUiThread {
             val device = intent.extras.getParcelable<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
             devicesAdapter.handleDevice(device)
+            fastForwardDevice(device)
+        }
+    }
+
+    private fun fastForwardDevice(device: BluetoothDevice) {
+        if (device.bondState == BluetoothDevice.BOND_BONDED && device.name == "HEXIWEAR") {
+            startActivity(DeviceDetailsActivity.getStartIntent(this, device))
+            finishAffinity()
         }
     }
 
@@ -51,6 +59,7 @@ class MainActivity : BaseActivity(), DiscoveryCallback, OnItemPositionClickListe
 
     override fun onDeviceConnected(device: BluetoothDevice) {
         devicesAdapter.handleDevice(device)
+        fastForwardDevice(device)
     }
 
     override fun onScanFinished() {

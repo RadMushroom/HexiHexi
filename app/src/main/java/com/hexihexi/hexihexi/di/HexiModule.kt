@@ -27,5 +27,5 @@ class HexiModule {
 
     @Singleton
     @Provides
-    internal fun provideluetoothService(context: Context): HexiBluetoothService = BluetoothServiceImpl(context)
+    internal fun provideBluetoothService(context: Context): HexiBluetoothService = BluetoothServiceImpl(context)
 }
