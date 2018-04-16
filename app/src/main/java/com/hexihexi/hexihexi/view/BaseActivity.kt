@@ -1,13 +1,10 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.view
 
 import android.app.Dialog
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
-/**
- * Created by yurii on 10/19/17.
- */
 abstract class BaseActivity : AppCompatActivity() {
 
     private var loadingDialog : Dialog? = null

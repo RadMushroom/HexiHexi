@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1098351159753",
+    "firebase_url": "https://hexihelper.firebaseio.com",
+    "project_id": "hexihelper",
+    "storage_bucket": "hexihelper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098351159753:android:660efda568a518e1",
+        "android_client_info": {
+          "package_name": "com.hexihexi.hexihexi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098351159753-0imckt28gg4t76lg2sb63tsdmslun31p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB58Zl22VLMx7ZzrjbJCphULxV0O263jnY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,11 +1,9 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.view
 
 import android.view.View
+import com.hexihexi.hexihexi.model.DeviceDetail
 import kotlinx.android.synthetic.main.device_option_item_layout.view.*
 
-/**
- * Created by yurii on 10/22/17.
- */
 class DeviceDetailViewHolder(view: View, onItemPositionClickListener: OnItemPositionClickListener): BaseViewHolder<DeviceDetail>(view) {
 
     init {

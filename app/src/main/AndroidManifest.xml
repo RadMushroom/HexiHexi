@@ -12,6 +12,7 @@
     <uses-permission android:name="com.google.android.gm.permission.READ_CONTENT_PROVIDER" />
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-feature
         android:name="android.hardware.telephony"
@@ -29,21 +30,43 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:launchMode="singleInstance">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.bluetooth.device.action.BOND_STATE_CHANGED" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.DeviceDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.ChartActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DeviceDetailsActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ChartActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.RestorePassActivity" />
+
+        <service
+            android:name=".notifications.MyFirebaseMessagingService"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service android:name=".notifications.MyFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".activities.UsersListActivity"></activity>
     </application>
 
 </manifest>

@@ -1,8 +1,9 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.view
 
 import android.bluetooth.BluetoothDevice
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.hexihexi.hexihexi.R
 
 /**
  * Created by yurii on 10/16/17.

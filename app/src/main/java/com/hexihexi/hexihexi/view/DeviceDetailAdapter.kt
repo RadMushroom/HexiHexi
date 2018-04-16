@@ -1,11 +1,10 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.hexihexi.hexihexi.R
+import com.hexihexi.hexihexi.model.DeviceDetail
 
-/**
- * Created by yurii on 10/22/17.
- */
 class DeviceDetailAdapter(private val onItemPositionClickListener: OnItemPositionClickListener) : BaseRecyclerAdapter<DeviceDetail>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<DeviceDetail> {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.device_option_item_layout, parent, false)

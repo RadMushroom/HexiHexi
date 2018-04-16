@@ -1,4 +1,4 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.view
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

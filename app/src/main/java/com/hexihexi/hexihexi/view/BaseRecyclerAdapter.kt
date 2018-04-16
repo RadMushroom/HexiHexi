@@ -1,10 +1,7 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.view
 
 import android.support.v7.widget.RecyclerView
-
-/**
- * Created by yurii on 10/16/17.
- */
+import java.util.*
 
 abstract class BaseRecyclerAdapter<Model>(protected var data: MutableList<Model> = mutableListOf()):
         RecyclerView.Adapter<BaseViewHolder<Model>>() {
@@ -18,6 +15,12 @@ abstract class BaseRecyclerAdapter<Model>(protected var data: MutableList<Model>
     fun addItem(model: Model) {
         data.add(model)
         notifyItemInserted(data.size - 1)
+    }
+
+    fun addItems(data: List<Model>) {
+        val startIndex = this.data.size
+        Collections.copy(this.data, data)
+        notifyItemRangeInserted(startIndex, data.size)
     }
 
     fun updateItem(model: Model, position: Int) {

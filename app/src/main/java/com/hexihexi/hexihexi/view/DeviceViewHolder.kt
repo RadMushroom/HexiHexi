@@ -1,4 +1,4 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.view
 
 import android.bluetooth.BluetoothDevice
 import android.view.View

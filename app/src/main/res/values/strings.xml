@@ -10,4 +10,11 @@
     <string name="mode_heartrate">Connected as: Heartrate</string>
     <string name="mode_pedometer">Connected as: Pedometer</string>
     <string name="mode_compass">Connected as: Compass</string>
+    <string name="enter_e_mail">Enter e-mail</string>
+    <string name="enter_password">Enter password</string>
+    <string name="register">Register</string>
+    <string name="log_in">Log In</string>
+    <string name="user_info">Current user: </string>
+    <string name="log_out">Log Out</string>
+    <string name="search">Search</string>
 </resources>

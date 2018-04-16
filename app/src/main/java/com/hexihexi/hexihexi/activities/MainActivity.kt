@@ -1,13 +1,18 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.activities
 
 import android.bluetooth.BluetoothDevice
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import com.hexihexi.hexihexi.HexiApp
+import com.hexihexi.hexihexi.R
 import com.hexihexi.hexihexi.discovery.BluetoothBondReceiver
 import com.hexihexi.hexihexi.discovery.DiscoveryCallback
 import com.hexihexi.hexihexi.discovery.DiscoveryService
 import com.hexihexi.hexihexi.discovery.OnDeviceBondListener
+import com.hexihexi.hexihexi.view.BaseActivity
+import com.hexihexi.hexihexi.view.DevicesAdapter
+import com.hexihexi.hexihexi.view.OnItemPositionClickListener
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 

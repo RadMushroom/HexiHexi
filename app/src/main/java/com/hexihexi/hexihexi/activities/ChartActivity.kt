@@ -1,4 +1,4 @@
-package com.hexihexi.hexihexi
+package com.hexihexi.hexihexi.activities
 
 import android.bluetooth.BluetoothDevice
 import android.content.Context
@@ -8,9 +8,13 @@ import android.os.Bundle
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
+import com.hexihexi.hexihexi.HexiApp
+import com.hexihexi.hexihexi.R
+import com.hexihexi.hexihexi.Utils
 import com.hexihexi.hexihexi.bluetooth.BluetoothServiceCallback
 import com.hexihexi.hexihexi.bluetooth.Characteristic
 import com.hexihexi.hexihexi.bluetooth.HexiBluetoothService
+import com.hexihexi.hexihexi.view.BaseActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
@@ -94,7 +98,7 @@ class ChartActivity : BaseActivity(), BluetoothServiceCallback {
                 }
             }
             Characteristic.GYRO -> {
-                tripleData.offer(parseTriple(value))
+                tripleData.offer(Utils.parseTriple(value).let { Triple(it[0], it[1], it[2])  })
                 val xDataSet = LineDataSet(arrayListOf(), "Gyro X").apply {
                     color = Color.RED
                     valueTextColor = Color.BLACK
@@ -118,7 +122,7 @@ class ChartActivity : BaseActivity(), BluetoothServiceCallback {
                 chart.data = LineData(xDataSet, yDataSet, zDataSet)
             }
             Characteristic.ACCELERATION -> {
-                tripleData.offer(parseTriple(value))
+                tripleData.offer(Utils.parseTriple(value).let { Triple(it[0], it[1], it[2])  })
                 val xDataSet = LineDataSet(arrayListOf(), "Acceleration X").apply {
                     color = Color.RED
                     valueTextColor = Color.BLACK
@@ -146,12 +150,4 @@ class ChartActivity : BaseActivity(), BluetoothServiceCallback {
         chart.invalidate()
     }
 
-    private fun parseTriple(value: String): Triple<Float, Float, Float> {
-        return value.replace("[^0-9,;-]".toRegex(), "")
-                .replace(",", ".")
-                .split(";")
-                .map { it.toFloat() }
-                .toList()
-                .let { Triple(it[0], it[1], it[2]) }
-    }
 }
