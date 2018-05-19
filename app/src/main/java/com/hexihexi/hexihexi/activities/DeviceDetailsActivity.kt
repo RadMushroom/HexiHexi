@@ -60,6 +60,8 @@ class DeviceDetailsActivity : BaseActivity(), BluetoothServiceCallback, OnItemPo
 
     override fun getContentView(): Int = R.layout.activity_device_details
 
+    private var buffering = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         HexiApp.hexiComponent().inject(this)
@@ -86,7 +88,32 @@ class DeviceDetailsActivity : BaseActivity(), BluetoothServiceCallback, OnItemPo
                             .child(dateFormat.format(Date())).setValue(message)
                 }, { Log.e("Database_error", "Error while writing to database: ${it.message}") })
         Observable.zip(accelerationSubject, gyroSubject, BiFunction { f1: List<Float>, f2: List<Float> -> Pair(f1, f2) })
-                .subscribe({}, {})
+                .filter{
+                    if (!buffering){
+                        buffering = detectFaintFirstStep(it.first, it.second)
+                    }
+                    return@filter buffering
+                }
+                .buffer(5)
+                .map {
+                    val first = mutableListOf<List<Float>>()
+                    val second = mutableListOf<List<Float>>()
+                    it.forEach {
+                        first.add(it.first)
+                        second.add(it.second)
+                    }
+                    return@map Pair(first, second)
+                }
+                .subscribe({
+                    val faintDetected = detectFaintSecondStep(it.first, it.second)
+                    if (faintDetected){
+                        database.child("users")
+                                .child(auth.currentUser?.uid)
+                                .child("data")
+                                .child("faints")
+                                .child(dateFormat.format(Date())).setValue("User's faint detected!")
+                    }
+                }, {Log.e("Database_error", "Error while writing to database: ${it.message}")})
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -152,14 +179,23 @@ class DeviceDetailsActivity : BaseActivity(), BluetoothServiceCallback, OnItemPo
                 .forEach { it.dispose() }
     }
 
-    private fun detectFaintFirstStep(accData: List<Float>, gyroData: List<Float>) {
+    private fun detectFaintFirstStep(accData: List<Float>, gyroData: List<Float>): Boolean {
         val accRMS = Math.sqrt(((accData[0] * accData[0]).toDouble()) + ((accData[1] * accData[1]).toDouble())
                 + ((accData[2] * accData[2]).toDouble())).toFloat()
-//        val gyroRMS = Math.sqrt(((gyroData[0] * gyroData[0]).toDouble()) + ((gyroData[1] * gyroData[1]).toDouble())
-//                + ((gyroData[2] * gyroData[2]).toDouble())).toFloat()
-        if (accRMS <= 0.33) {
-            Log.e("Faint", "Faint is possible!")
-            //
+        return accRMS <= 0.33
+    }
+
+    private fun detectFaintSecondStep(accData: List<List<Float>>, gyroData: List<List<Float>>): Boolean {
+        var accRMS = 0f
+        var gyroRMS = 0f
+        (0 until accData.size).forEach{
+            accRMS += Math.sqrt(((accData[it][0] * accData[it][0]).toDouble()) + ((accData[it][1] * accData[it][1]).toDouble())
+                    + ((accData[it][2] * accData[it][2]).toDouble())).toFloat()
         }
+        (0 until accData.size).forEach {
+            gyroRMS += Math.sqrt(((gyroData[it][0] * gyroData[it][0]).toDouble()) + ((gyroData[it][1] * gyroData[it][1]).toDouble())
+                    + ((gyroData[it][2] * gyroData[it][2]).toDouble())).toFloat()
+        }
+        return accRMS >= 2.4 && gyroRMS >= 240
     }
 }

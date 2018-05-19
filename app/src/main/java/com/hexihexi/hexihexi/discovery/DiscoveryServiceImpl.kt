@@ -12,11 +12,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-
-/**
- * Created by yurii on 10/16/17.
- */
-
 class DiscoveryServiceImpl(private val context: Context) : DiscoveryService {
 
     companion object {

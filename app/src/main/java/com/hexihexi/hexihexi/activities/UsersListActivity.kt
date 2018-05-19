@@ -32,7 +32,7 @@ class UsersListActivity : AppCompatActivity(), OnItemPositionClickListener {
 
     override fun onItemClicked(position: Int) {
         val item = userListAdapter.getItem(position)
-        dbUsers.child(auth.uid).child("followers").child(item?.userEmail).setValue(item?.userId)
+        dbUsers.child(item?.userId).child("followers").push().setValue(auth.uid)
         Toast.makeText(this, "User ${item?.userEmail} is now followed", Toast.LENGTH_SHORT).show()
     }
 

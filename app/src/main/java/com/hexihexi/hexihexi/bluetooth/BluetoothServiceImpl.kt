@@ -11,10 +11,6 @@ import java.util.*
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.LinkedBlockingDeque
 
-/**
- * Created by yurii on 10/22/17.
- */
-
 class BluetoothServiceImpl(private val context: Context): HexiBluetoothService {
 
     private lateinit var device: BluetoothDevice

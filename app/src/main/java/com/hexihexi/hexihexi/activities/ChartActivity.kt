@@ -149,5 +149,4 @@ class ChartActivity : BaseActivity(), BluetoothServiceCallback {
         }
         chart.invalidate()
     }
-
 }
